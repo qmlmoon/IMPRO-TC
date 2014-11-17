@@ -1,13 +1,20 @@
 package impro.tc;
 
+import edu.stanford.nlp.ie.crf.CRFClassifier;
+import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.ling.CoreLabel;
 import org.apache.commons.lang.SerializationUtils;
-import org.apache.flink.api.common.functions.FilterFunction;
+import org.apache.flink.api.common.functions.RichFilterFunction;
+import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.function.sink.SinkFunction;
 import org.apache.flink.streaming.connectors.json.JSONParseFlatMap;
 import org.apache.flink.streaming.connectors.rabbitmq.RMQSource;
 import org.apache.flink.util.Collector;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * Text categorization on top of apache flink streaming. The streaming data is retrieved from RMQ server.
@@ -18,7 +25,6 @@ import org.apache.flink.util.Collector;
 public class TextCategorisation {
 
 	public static final class MyRMQPrintSink implements SinkFunction<News> {
-		private static final long serialVersionUID = 1L;
 
 		@Override
 		public void invoke(News news) {
@@ -32,8 +38,6 @@ public class TextCategorisation {
 		public MyRMQSource(String HOST_NAME, String QUEUE_NAME) {
 			super(HOST_NAME, QUEUE_NAME);
 		}
-
-		private static final long serialVersionUID = 1L;
 
 		@Override
 		public String deserialize(byte[] t) {
@@ -70,18 +74,34 @@ public class TextCategorisation {
 		}
 	}
 
-	public static final class FilterCountry implements FilterFunction<News> {
+	public static final class FilterCountry extends RichFilterFunction<News> {
 
 		private String country = null;
+		private transient CRFClassifier<CoreLabel> crfClassifier;
 
 		public FilterCountry(String country) {
 			this.country = country;
 		}
 
-		public FilterCountry() {}
-
+		@Override
+		public void open(Configuration parameters) throws Exception {
+			System.out.println("starting loading classifier...");
+			Runtime runtime = Runtime.getRuntime();
+			System.out.println("free memory: " + runtime.freeMemory() / 1024 / 1024);
+			System.out.println("total memory:" + runtime.totalMemory() / 1024 / 1024);
+			crfClassifier = CRFClassifier.getClassifier(new File("/home/qmlmoon/Documents/text-categorisation/resource/hgc_175m_600.crf.ser.gz"));
+			System.out.println("finishing loading classifier...");
+		}
 		@Override
 		public boolean filter(News n) throws Exception {
+			List<List<CoreLabel>> NerOfNews = crfClassifier.classify(n.getNews());
+
+			for (List<CoreLabel> sentence : NerOfNews)
+				for (CoreLabel word : sentence) {
+					if (!word.get(CoreAnnotations.AnswerAnnotation.class).toString().equals("O")) {
+						System.out.println(word.get(CoreAnnotations.AnswerAnnotation.class));
+					}
+				}
 			if (this.country != null && n.getNews().toUpperCase().contains(this.country) != true) {
 				return false;
 			} else {
@@ -93,7 +113,7 @@ public class TextCategorisation {
 	//---------------------------------------------------------------------------------------------------
 
 	public static void main(String[] args) throws Exception {
-		StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironment(4);
+		StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 		env.setBufferTimeout(2000);
 		@SuppressWarnings("unused")
 		DataStream<News> dataStream1 = env
