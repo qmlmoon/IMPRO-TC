@@ -28,7 +28,12 @@ public class TextCategorisation {
 
 		@Override
 		public void invoke(News news) {
-			System.out.println(news.getNews());
+			System.out.println("starting sending news to server...");
+			try {
+				HttpConnection.sendPost(news);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -64,7 +69,7 @@ public class TextCategorisation {
 			String srcName = this.getString(value, "srcName");
 
 			cNews.setNews(news);
-			cNews.setDataString(date);
+			cNews.setDateString(date);
 			cNews.setTitle(title);
 			cNews.setSubTitle(subTitle);
 			cNews.setSrcUrl(srcUrl);
@@ -85,28 +90,33 @@ public class TextCategorisation {
 
 		@Override
 		public void open(Configuration parameters) throws Exception {
-			System.out.println("starting loading classifier...");
-			Runtime runtime = Runtime.getRuntime();
-			System.out.println("free memory: " + runtime.freeMemory() / 1024 / 1024);
-			System.out.println("total memory:" + runtime.totalMemory() / 1024 / 1024);
-			crfClassifier = CRFClassifier.getClassifier(new File("/home/qmlmoon/Documents/text-categorisation/resource/hgc_175m_600.crf.ser.gz"));
-			System.out.println("finishing loading classifier...");
+//			System.out.println("starting loading classifier...");
+//			Runtime runtime = Runtime.getRuntime();
+//			System.out.println("free memory: " + runtime.freeMemory() / 1024 / 1024);
+//			System.out.println("total memory:" + runtime.totalMemory() / 1024 / 1024);
+//			crfClassifier = CRFClassifier.getClassifier(new File("/home/qmlmoon/Documents/text-categorisation/resource/hgc_175m_600.crf.ser.gz"));
+//			System.out.println("finishing loading classifier...");
 		}
 		@Override
 		public boolean filter(News n) throws Exception {
-			List<List<CoreLabel>> NerOfNews = crfClassifier.classify(n.getNews());
+//			List<List<CoreLabel>> NerOfNews = crfClassifier.classify(n.getNews());
+//
+//			for (List<CoreLabel> sentence : NerOfNews)
+//				for (CoreLabel word : sentence) {
+//					if (word.get(CoreAnnotations.AnswerAnnotation.class).toString().equals("I-LOC")) {
+//						if (word.word().toUpperCase().equals(this.country)) {
+//							return true;
+//						}
+//					}
+//				}
 
-			for (List<CoreLabel> sentence : NerOfNews)
-				for (CoreLabel word : sentence) {
-					if (!word.get(CoreAnnotations.AnswerAnnotation.class).toString().equals("O")) {
-						System.out.println(word.get(CoreAnnotations.AnswerAnnotation.class));
-					}
-				}
-			if (this.country != null && n.getNews().toUpperCase().contains(this.country) != true) {
-				return false;
-			} else {
-				return true;
-			}
+
+//			if (this.country != null && n.getNews().toUpperCase().contains(this.country) != true) {
+//				return false;
+//			} else {
+//				return true;
+//			}
+			return true;
 		}
 	}
 
@@ -117,9 +127,9 @@ public class TextCategorisation {
 		env.setBufferTimeout(2000);
 		@SuppressWarnings("unused")
 		DataStream<News> dataStream1 = env
-			.addSource(new MyRMQSource("localhost", "hello"))
+			.addSource(new MyRMQSource("localhost", "hello"), Integer.parseInt(args[0]))
 			.flatMap(new MyJSONParserFlatMap())
-			.filter(new FilterCountry("SCHWEIZ"))
+			.filter(new FilterCountry("FRANKFURT"))
 			.addSink(new MyRMQPrintSink());
 
 
