@@ -24,11 +24,11 @@ import java.util.List;
  */
 public class TextCategorisation {
 
-	public static final class MyRMQPrintSink implements SinkFunction<News> {
+	public static final class HttpSink implements SinkFunction<News> {
 
 		@Override
 		public void invoke(News news) {
-			System.out.println("starting sending news to server...");
+			System.out.println("starting news with tille [" + news.getTitle() + "] to server...");
 			try {
 				HttpConnection.sendPost(news);
 			} catch (Exception e) {
@@ -130,11 +130,7 @@ public class TextCategorisation {
 			.addSource(new MyRMQSource("localhost", "hello"), Integer.parseInt(args[0]))
 			.flatMap(new MyJSONParserFlatMap())
 			.filter(new FilterCountry("FRANKFURT"))
-			.addSink(new MyRMQPrintSink());
-
-
-//		dataStream1.count()
-//			.print();
+			.addSink(new HttpSink());
 
 		env.execute();
 	}
