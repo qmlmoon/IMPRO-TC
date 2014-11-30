@@ -1,4 +1,4 @@
-package impro.tc;
+package impro.tc.flink;
 
 import org.apache.commons.lang.SerializationUtils;
 import org.apache.flink.streaming.connectors.rabbitmq.RMQSink;

@@ -1,7 +1,6 @@
-package impro.tc;
+package impro.tc.flink;
 
 import edu.stanford.nlp.ie.crf.CRFClassifier;
-import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 import org.apache.commons.lang.SerializationUtils;
 import org.apache.flink.api.common.functions.RichFilterFunction;
@@ -12,9 +11,6 @@ import org.apache.flink.streaming.api.function.sink.SinkFunction;
 import org.apache.flink.streaming.connectors.json.JSONParseFlatMap;
 import org.apache.flink.streaming.connectors.rabbitmq.RMQSource;
 import org.apache.flink.util.Collector;
-
-import java.io.File;
-import java.util.List;
 
 /**
  * Text categorization on top of apache flink streaming. The streaming data is retrieved from RMQ server.

@@ -7,6 +7,7 @@
 .version.properties
 filter.properties
 target
+resource
 tmp
 *.class
 *.iml

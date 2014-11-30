@@ -1,4 +1,4 @@
-package impro.tc;
+package impro.tc.flink;
 
 import org.apache.flink.api.java.tuple.Tuple6;
 
