@@ -15,6 +15,11 @@
 
   <dependencies>
 		<dependency>
+			<groupId>impro.tc</groupId>
+			<artifactId>dbpro-pipeline</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-java</artifactId>
 			<version>0.7.0-incubating</version>
@@ -28,11 +33,6 @@
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-streaming-connectors</artifactId>
 			<version>0.7.0-incubating</version>
-		</dependency>
-		<dependency>
-			<groupId>edu.stanford.nlp</groupId>
-			<artifactId>ner</artifactId>
-			<version>3.5</version>
 		</dependency>
 
   </dependencies>

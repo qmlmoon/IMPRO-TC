@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <name>NewTypeSystem</name>
+    <imports>
+        <import location="BasicTypeSystem.xml"/>
+        <import location="typesystem.xml"/>
+    </imports>
+    <types>
+        <typeDescription>
+            <name>New.Naturkatastrophe</name>
+            <description>Type defined in null.New</description>
+            <supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+        <typeDescription>
+            <name>New.Krankheit</name>
+            <description>Type defined in null.New</description>
+            <supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+        <typeDescription>
+            <name>New.Krise</name>
+            <description>Type defined in null.New</description>
+            <supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+        <typeDescription>
+            <name>New.NKDok</name>
+            <description>Type defined in null.New</description>
+            <supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+        <typeDescription>
+            <name>New.KraDok</name>
+            <description>Type defined in null.New</description>
+            <supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+        <typeDescription>
+            <name>New.KriDok</name>
+            <description>Type defined in null.New</description>
+            <supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+        <typeDescription>
+            <name>New.Naturkatastrophe</name>
+            <description>Type defined in null.New</description>
+            <supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+        <typeDescription>
+            <name>New.Krankheit</name>
+            <description>Type defined in null.New</description>
+            <supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+        <typeDescription>
+            <name>New.Krise</name>
+            <description>Type defined in null.New</description>
+            <supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+        <typeDescription>
+            <name>New.NKDok</name>
+            <description>Type defined in null.New</description>
+            <supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+        <typeDescription>
+            <name>New.KraDok</name>
+            <description>Type defined in null.New</description>
+            <supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+        <typeDescription>
+            <name>New.KriDok</name>
+            <description>Type defined in null.New</description>
+            <supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+    </types>
+</typeSystemDescription>

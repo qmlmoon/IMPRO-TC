@@ -1,0 +1,5 @@
+classpath*:descriptor/BasicTypeSystem.xml
+classpath*:descriptor/InternalTypeSystem.xml
+classpath*:descriptor/HtmlTypeSystem.xml
+classpath*:descriptor/PlainTextTypeSystem.xml
+classpath*:descriptor/typesystem.xml

@@ -12,6 +12,7 @@
 	<modules>
 		<module>impro-flink</module>
 		<module>impro-webserver</module>
+		<module>dbpro-pipeline</module>
 	</modules>
 
 

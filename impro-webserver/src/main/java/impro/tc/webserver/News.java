@@ -10,14 +10,16 @@ public class News {
 	private String subtitle;
 	private String url;
 	private String src;
+	private String category;
 
-	public News(String news, String date, String title, String subtitle, String url, String src) {
+	public News(String news, String date, String title, String subtitle, String url, String src, String category) {
 		this.news = news;
 		this.date = date;
 		this.title = title;
 		this.subtitle = subtitle;
 		this.url = url;
 		this.src = src;
+		this.category = category;
 	}
 
 	public String getNews() {
@@ -43,4 +45,6 @@ public class News {
 	public String getSrc() {
 		return this.src;
 	}
+
+	public String getCategory() { return this.category; }
 }

@@ -1,0 +1,239 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>impro.tc</groupId>
+		<artifactId>impro-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>dbpro-pipeline</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>DBPRO pipeline</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20141113</version>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp</groupId>
+			<artifactId>dkpro-core</artifactId>
+			<version>20130511.0</version>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>
+  			de.tudarmstadt.ukp.dkpro.core.io.text-asl
+  		</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>
+  			de.tudarmstadt.ukp.dkpro.core.opennlp-asl
+  		</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.io.xmi-asl</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>
+  			de.tudarmstadt.ukp.dkpro.core.languagetool-asl
+  		</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>
+  			de.tudarmstadt.ukp.dkpro.core.maltparser-asl
+  		</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opennlp</groupId>
+			<artifactId>sentence-de-maxent</artifactId>
+			<version>20120616.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opennlp.bin</groupId>
+			<artifactId>sentence-de-maxent</artifactId>
+			<version>20120616</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opennlp</groupId>
+			<artifactId>token-de-maxent</artifactId>
+			<version>20120616.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opennlp.bin</groupId>
+			<artifactId>token-de-maxent</artifactId>
+			<version>20120616</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opennlp.bin</groupId>
+			<artifactId>tagger-de-maxent</artifactId>
+			<version>20120616</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.stanfordnlp</groupId>
+			<artifactId>ner-de</artifactId>
+			<version>20120522.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.stanfordnlp.bin</groupId>
+			<artifactId>ner-de</artifactId>
+			<version>20120522</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.opennlp</groupId>
+			<artifactId>opennlp-maxent</artifactId>
+			<version>3.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.lexmorph.bin</groupId>
+			<artifactId>asl</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.opennlp</groupId>
+			<artifactId>opennlp-tools</artifactId>
+			<version>1.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.opennlp</groupId>
+			<artifactId>opennlp-uima</artifactId>
+			<version>1.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>ruta-core</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimafit-core</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
+				<version>1.6.2</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>
+  				de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl
+  			</artifactId>
+				<version>1.6.2</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals><goal>shade</goal></goals>
+						<configuration>
+							<transformers>
+								<!-- Set the main class of the executable JAR -->
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<manifestEntries>
+										<Main-Class>my.App</Main-Class>
+									</manifestEntries>
+								</transformer>
+								<!-- Merge the uimaFIT configuration files -->
+								<!--<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">-->
+									<!--<resource>-->
+										<!--META-INF/org.apache.uima.fit/fsindexes.txt-->
+									<!--</resource>-->
+								<!--</transformer>-->
+								<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>
+										META-INF/org.apache.uima.fit/types.txt
+									</resource>
+								</transformer>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>
+										META-INF/org/languagetool/language-module.properties
+									</resource>
+								</transformer>
+								<!--<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">-->
+									<!--<resource>-->
+										<!--META-INF/org.apache.uima.fit/typepriorities.txt-->
+									<!--</resource>-->
+								<!--</transformer>-->
+								<!--
+									Prevent huge shaded artifacts from being deployed
+									to a Maven repository (remove if not desired)
+								-->
+								<!--<outputFile>-->
+									<!--standalone.jar-->
+								<!--</outputFile>-->
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>my.App</mainClass>
+						</manifest>
+
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>

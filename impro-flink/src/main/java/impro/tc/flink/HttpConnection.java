@@ -9,7 +9,7 @@ import java.net.URL;
  */
 public class HttpConnection {
 
-	public static void sendPost(News news) throws Exception {
+	public static void sendPost(News news, String category) throws Exception {
 		String url = "http://192.168.2.106:8080/addnews";
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -17,7 +17,7 @@ public class HttpConnection {
 		con.setRequestMethod("POST");
 		con.setRequestProperty("charset", "utf-8");
 		con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-		String urlParameters = news.toString();
+		String urlParameters = news.toString() + "&category=" + category;
 
 		con.setDoOutput(true);
 		con.setDoInput(true);

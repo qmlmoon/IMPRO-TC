@@ -23,8 +23,9 @@ public class NewsController {
 						@RequestParam(value="title") String title,
 						@RequestParam(value="subtitle") String subtitle,
 						@RequestParam(value="url") String url,
-						@RequestParam(value="src") String src) {
-		newsQueue.add(new News(news, date, title, subtitle, url, src));
+						@RequestParam(value="src") String src,
+						@RequestParam(value="category") String category) {
+		newsQueue.add(new News(news, date, title, subtitle, url, src, category));
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value="/getnews")

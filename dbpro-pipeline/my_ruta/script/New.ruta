@@ -1,0 +1,14 @@
+TYPESYSTEM typesystem;
+
+WORDLIST WNaturkatastrophe = 'WoerterbuchNaturkatastrophen.txt';
+WORDLIST WKrankheit = 'WoerterbuchKrankheiten.txt';
+WORDLIST WKrisen = 'WoerterbuchSonstigeKrisen.txt';
+
+DECLARE Naturkatastrophe, Krankheit, Krise;
+Document{-> MARKFAST(Naturkatastrophe, WNaturkatastrophe)};
+Document{-> MARKFAST(Krankheit, WKrankheit)};
+Document{-> MARKFAST(Krise, WKrisen)};
+DECLARE NKDok, KraDok, KriDok;
+Document{CONTAINS(Naturkatastrophe) -> CREATE(NKDok)};
+Document{CONTAINS(Krankheit) -> CREATE(KraDok)};
+Document{CONTAINS(Krise) -> CREATE(KriDok)};
